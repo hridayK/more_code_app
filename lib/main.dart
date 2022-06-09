@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'English.dart';
+import 'Morse.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: _title,
       home: const Home(),
     );
@@ -30,8 +32,8 @@ class _HomeState extends State<Home> {
   static const _style = TextStyle(fontSize: 114,fontWeight: FontWeight.bold);
 
   static const List<Widget> _widgets = <Widget>[
-    Text("1",style: _style,),
-    Text("2",style: _style,)
+    EnglishPage(),
+    MorsePage(),
   ];
 
   int _widgetIndex = 0;
