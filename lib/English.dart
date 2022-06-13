@@ -9,36 +9,99 @@ class EnglishPage extends StatefulWidget {
 }
 
 class _EnglishPageState extends State<EnglishPage> {
-  String _input = "";
-  String _output = "";
+  String? _input = "";
+  String? _output = "";
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.all(30),
+      margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+      child: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            TextField(
-              onChanged: (text) {
-                setState(() {
-                  var obj = Converter(text.toUpperCase(), true);
-                  _input = text;
-                  _output = obj.convert();
-                });
-              },
-              style: TextStyle(fontSize: 30, color: Colors.deepPurple, fontWeight: FontWeight.bold),
+            Scrollbar(
+              child: TextField(
+                onChanged: (text) {
+                  setState(() {
+                    var obj = Converter(text.toUpperCase(), true);
+                    _input = text;
+                    _output = obj.convert();
+                  });
+                },
+                style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.deepPurple,
+                    fontWeight: FontWeight.bold),
+                maxLines: 5,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurple, width: 6),
+                  ),
+                ),
+                enableSuggestions: true,
+              ),
             ),
-            // Row(
-            //   children: [
-            //     RawMaterialButton(
-            //       onPressed: () {},
-            //       child: const Icon(Icons.translate, size: 25,),
-            //     )
-            //   ],
-            // ),
-            Text(_output,style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold), textScaleFactor: 1.5,)
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
+
+            /* OUTPUT SECTION */
+            Scrollbar(
+              thumbVisibility: true,
+              child: Container(
+                height: MediaQuery.of(context).size.height*0.5,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Morse Code:",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          RawMaterialButton(
+                            onPressed: () {},
+                            child: const Icon(
+                              Icons.copy_all,
+                              size: 40,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            _output,
+                            style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                            textScaleFactor: 1.5,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
