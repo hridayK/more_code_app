@@ -52,8 +52,10 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text(
           "Morse Code Converter",
-          style: GoogleFonts.getFont('Montserrat',
-              textStyle: const TextStyle(color: Colors.black, fontSize: 26)),
+          style: GoogleFonts.getFont(
+            'Montserrat',
+            textStyle: const TextStyle(color: Colors.black, fontSize: 26),
+          ),
         ),
         elevation: 0,
         backgroundColor: const Color(0x00ffffff),
@@ -73,7 +75,7 @@ class _HomeState extends State<Home> {
                 SizedBox(width: _paddingAdjust),
                 RawMaterialButton(
                   onPressed: _switchMode,
-                  fillColor: Colors.indigo,
+                  fillColor: const Color(0xff2faeff),
                   splashColor: Colors.blue,
                   child: const Icon(
                     Icons.compare_arrows,
@@ -83,9 +85,6 @@ class _HomeState extends State<Home> {
                 ),
                 const SizedBox(width: 7),
                 Text(_outputLang, style: _topTextStyle),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.07,
-                )
               ],
             ),
             _widgets[_widgetIndex],

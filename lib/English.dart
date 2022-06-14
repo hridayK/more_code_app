@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'Converter.dart';
 
 class EnglishPage extends StatefulWidget {
@@ -9,9 +10,8 @@ class EnglishPage extends StatefulWidget {
 }
 
 class _EnglishPageState extends State<EnglishPage> {
-  String? _input = "";
-  String? _output = "";
-
+  String _input = "";
+  String _output = "";
 
   @override
   Widget build(BuildContext context) {
@@ -39,22 +39,24 @@ class _EnglishPageState extends State<EnglishPage> {
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.deepPurple, width: 6),
                   ),
+                  hintText: "Enter your message",
                 ),
+                keyboardType: TextInputType.text,
                 enableSuggestions: true,
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
+              height: MediaQuery.of(context).size.height * 0.03,
             ),
 
             /* OUTPUT SECTION */
             Scrollbar(
               thumbVisibility: true,
               child: Container(
-                height: MediaQuery.of(context).size.height*0.5,
+                height: MediaQuery.of(context).size.height * 0.55,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.red,
+                  color: const Color(0xff2C2A4A),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: SingleChildScrollView(
@@ -73,7 +75,14 @@ class _EnglishPageState extends State<EnglishPage> {
                                 fontWeight: FontWeight.bold),
                           ),
                           RawMaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Copied the Message"),
+                                ),
+                              );
+                              Clipboard.setData(ClipboardData(text: _output));
+                            },
                             child: const Icon(
                               Icons.copy_all,
                               size: 40,

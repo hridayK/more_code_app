@@ -73,7 +73,7 @@ class Converter {
       }
     }
     if (_isEnglish) {
-      op = words.join("");
+      op = words.join(" ");
     }
     return op;
   }
