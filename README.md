@@ -1,5 +1,8 @@
-# morse_code_app
+# Morse Code App
 
-### Current State of the project:
+### An app to play around with morse code:
 
-![log1](https://user-images.githubusercontent.com/16136188/172910610-a12d45f0-0eb8-49cf-be8b-5e41deadca42.gif)
+## Preview:
+
+![image](https://user-images.githubusercontent.com/16136188/173532855-12383a52-c62e-48fb-9bea-289d188da40b.png)  ![image](https://user-images.githubusercontent.com/16136188/173533431-c3258144-ffec-4690-afac-6752d162adbd.png)
+
