@@ -15,9 +15,9 @@ class _EnglishPageState extends State<EnglishPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-      child: SingleChildScrollView(
+    return SafeArea(
+      child: Container(
+        margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -51,62 +51,57 @@ class _EnglishPageState extends State<EnglishPage> {
 
             /* OUTPUT SECTION */
             Scrollbar(
-              thumbVisibility: true,
               child: Container(
-                height: MediaQuery.of(context).size.height * 0.55,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: const Color(0xff2C2A4A),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "Morse Code:",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          RawMaterialButton(
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text("Copied the Message"),
-                                ),
-                              );
-                              Clipboard.setData(ClipboardData(text: _output));
-                            },
-                            child: const Icon(
-                              Icons.copy_all,
-                              size: 40,
-                              color: Colors.white,
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xff2C2A4A),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Morse Code:",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold),
                             ),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            _output,
-                            style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                            textScaleFactor: 1.5,
-                          ),
-                        ],
-                      )
-                    ],
+                            RawMaterialButton(
+                              onPressed: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text("Copied the Message"),
+                                  ),
+                                );
+                                Clipboard.setData(ClipboardData(text: _output));
+                              },
+                              child: const Icon(
+                                Icons.copy_all,
+                                size: 40,
+                                color: Colors.white,
+                              ),
+                            )
+                          ],
+                        ),
+
+                        Text(
+                          _output,
+                          style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                          textScaleFactor: 1.5,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
             ),
           ],
         ),

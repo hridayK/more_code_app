@@ -21,110 +21,117 @@ class _MorsePageState extends State<MorsePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.25,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white24,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.blue)
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children:[
-                      const Text(
-                        "Morse:",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 24,
+            Scrollbar(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.32,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white24,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.blue)
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children:[
+                          const Text(
+                            "Morse:",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          RawMaterialButton(onPressed: () async {
+                            ClipboardData? data = await Clipboard.getData(Clipboard.kTextPlain);
+                            setState((){
+                              _input = data?.text ?? "";
+                            });
+                            updateText(_input);
+                          },
+                            child: const Icon(Icons.paste),
+                          )
+                        ],
+                      ),
+                      Text(
+                        _input,
+                        style: const TextStyle(
+                            color: Colors.deepPurple,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
-                      RawMaterialButton(onPressed: () async {
-                        ClipboardData? data = await Clipboard.getData(Clipboard.kTextPlain);
-                        setState((){
-                          _input = data?.text ?? "";
-                        });
-                        updateText(_input);
-                      },
-                        child: const Icon(Icons.paste),
-                      )
                     ],
                   ),
-                  Text(
-                    _input,
-                    style: const TextStyle(
-                        color: Colors.deepPurple,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ],
+                ),
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
 
             /* OUTPUT SECTION */
             SingleChildScrollView(
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.4,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: const Color(0xff2C2A4A),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Scrollbar(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.35,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xff2C2A4A),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Text(
-                          "English:",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        RawMaterialButton(
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Copied the Message"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "English:",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            RawMaterialButton(
+                              onPressed: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text("Copied the Message"),
+                                  ),
+                                );
+                                Clipboard.setData(ClipboardData(text: _output));
+                              },
+                              child: const Icon(
+                                Icons.copy_all,
+                                size: 30,
+                                color: Colors.white,
                               ),
-                            );
-                            Clipboard.setData(ClipboardData(text: _output));
-                          },
-                          child: const Icon(
-                            Icons.copy_all,
-                            size: 40,
-                            color: Colors.white,
-                          ),
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              _output,
+                              style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ],
                         )
                       ],
                     ),
-                    Column(
-                      children: [
-                        Text(
-                          _output,
-                          style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                          textScaleFactor: 1.5,
-                        ),
-                      ],
-                    )
-                  ],
+                  ),
                 ),
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
